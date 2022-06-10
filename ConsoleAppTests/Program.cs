@@ -58,6 +58,16 @@ namespace ConsoleAppTests
                 Console.WriteLine("Введите номер правильного варианта ответа"); // Добавить ошибку при != 1, 2
                 questions_true_variant.Add(Console.ReadLine());
             }
+            string json_1 = JsonConvert.SerializeObject(questions_count);
+            File.WriteAllText($@"D:\\{test_name}.txt", json_1);
+            string json_2 = JsonConvert.SerializeObject(questions_name);
+            File.WriteAllText($@"D:\\{test_name}.txt", json_2);
+            string json_3 = JsonConvert.SerializeObject(questions_1_variant);
+            File.WriteAllText($@"D:\\{test_name}.txt", json_3);
+            string json_4 = JsonConvert.SerializeObject(questions_2_variant);
+            File.WriteAllText($@"D:\\{test_name}.txt", json_4);
+            string json_5 = JsonConvert.SerializeObject(questions_true_variant);
+            File.WriteAllText($@"D:\\{test_name}.txt", json_5);
         }
         static void PassTest() // В этой функции я буду загружать переменные и списки из файла json
         {
