@@ -1,16 +1,18 @@
 ﻿using System;
 using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 
 namespace ConsoleAppTests
 {
-    struct test
-    {
-        int test_count_questions;
-    }
     class Program
     {
-        public static List<string> Test = new List<string>();
+        public static List<string> test = new List<string>();
+        public static List<string> questions_name = new List<string>();
+        public static List<string> questions_1_variant = new List<string>();
+        public static List<string> questions_2_variant = new List<string>();
+        public static List<string> questions_true_variant = new List<string>();
         static void Main(string[] args)
         {
             Menu();
@@ -41,11 +43,24 @@ namespace ConsoleAppTests
         }
         static void CreateTest()
         {
-
+            Console.WriteLine("Введите название теста");
+            string test_name = Console.ReadLine();
+            Console.WriteLine("Введите количество вопросов в тесте"); // Добавить ошибку при вводе не чисел
+            int questions_count = int.Parse(Console.ReadLine());
+            for (int i = 0; i < questions_count; i++)
+            {
+                Console.WriteLine("Введите название вопроса");
+                questions_name.Add(Console.ReadLine());
+                Console.WriteLine("Введите первый вариант ответа");
+                questions_1_variant.Add(Console.ReadLine());
+                Console.WriteLine("Введите второй вариант ответа");
+                questions_2_variant.Add(Console.ReadLine());
+                Console.WriteLine("Введите номер правильного варианта ответа"); // Добавить ошибку при != 1, 2
+                questions_true_variant.Add(Console.ReadLine());
+            }
         }
-        static void PassTest()
+        static void PassTest() // В этой функции я буду загружать переменные и списки из файла json
         {
-
         }
     }
 }
