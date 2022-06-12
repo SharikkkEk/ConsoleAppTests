@@ -16,7 +16,6 @@ namespace ConsoleAppTests
             public string questions_2_variant;
             public int questions_true_variant;
         }
-        string quest = "21";
         public static List<test_element> Test = new List<test_element>();
         static void Main(string[] args)
         {
