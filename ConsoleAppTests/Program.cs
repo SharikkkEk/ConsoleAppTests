@@ -8,11 +8,16 @@ namespace ConsoleAppTests
 {
     class Program
     {
-        public static List<string> test = new List<string>();
-        public static List<string> questions_name = new List<string>();
-        public static List<string> questions_1_variant = new List<string>();
-        public static List<string> questions_2_variant = new List<string>();
-        public static List<string> questions_true_variant = new List<string>();
+        
+        public struct test_element
+        {
+            public string questions_name;
+            public string questions_1_variant;
+            public string questions_2_variant;
+            public int questions_true_variant;
+        }
+        string quest = "21";
+        public static List<test_element> Test = new List<test_element>();
         static void Main(string[] args)
         {
             Menu();
@@ -20,7 +25,7 @@ namespace ConsoleAppTests
         static void Menu()
         {
             Console.WriteLine("Введите 1, если хотите создать тест,  или введите 2, если хотите пройти тест");
-            try 
+            try
             {
                 int a = Convert.ToInt32(Console.ReadLine());
                 if (a == 1)
@@ -45,32 +50,54 @@ namespace ConsoleAppTests
         {
             Console.WriteLine("Введите название теста");
             string test_name = Console.ReadLine();
-            Console.WriteLine("Введите количество вопросов в тесте"); // Добавить ошибку при вводе не чисел
-            int questions_count = int.Parse(Console.ReadLine());
-            for (int i = 0; i < questions_count; i++)
+            Console.WriteLine("Введите количество вопросов в тесте"); 
+            try
             {
-                Console.WriteLine("Введите название вопроса");
-                questions_name.Add(Console.ReadLine());
-                Console.WriteLine("Введите первый вариант ответа");
-                questions_1_variant.Add(Console.ReadLine());
-                Console.WriteLine("Введите второй вариант ответа");
-                questions_2_variant.Add(Console.ReadLine());
-                Console.WriteLine("Введите номер правильного варианта ответа"); // Добавить ошибку при != 1, 2
-                questions_true_variant.Add(Console.ReadLine());
+                int questions_count = int.Parse(Console.ReadLine());
+                for (int i = 0; i < questions_count; i++)
+                {
+                    CycleGenerateTest();
+                }
             }
-            string json_1 = JsonConvert.SerializeObject(questions_count);
-            File.WriteAllText($@"D:\\{test_name}.txt", json_1);
-            string json_2 = JsonConvert.SerializeObject(questions_name);
-            File.WriteAllText($@"D:\\{test_name}.txt", json_2);
-            string json_3 = JsonConvert.SerializeObject(questions_1_variant);
-            File.WriteAllText($@"D:\\{test_name}.txt", json_3);
-            string json_4 = JsonConvert.SerializeObject(questions_2_variant);
-            File.WriteAllText($@"D:\\{test_name}.txt", json_4);
-            string json_5 = JsonConvert.SerializeObject(questions_true_variant);
-            File.WriteAllText($@"D:\\{test_name}.txt", json_5);
+            catch
+            {
+                Console.WriteLine("Вы ввели не число");
+            }
+
+            string Json = JsonConvert.SerializeObject(Test);
+            File.WriteAllText($@"D:\\{test_name}.txt", Json);
+            Menu();
         }
+
         static void PassTest() // В этой функции я буду загружать переменные и списки из файла json
         {
+
+        }
+
+        static void CycleGenerateTest()
+        {
+            test_element a = new test_element();
+
+            Console.WriteLine("Введите название вопроса");
+            a.questions_name = Console.ReadLine();
+
+            Console.WriteLine("Введите первый вариант ответа");
+            a.questions_1_variant = Console.ReadLine();
+
+            Console.WriteLine("Введите второй вариант ответа");
+            a.questions_2_variant = Console.ReadLine();
+
+            Console.WriteLine("Введите номер правильного варианта ответа"); 
+            a.questions_true_variant = int.Parse(Console.ReadLine());
+
+            if (a.questions_true_variant != 1 && a.questions_true_variant != 2)
+            {
+                Console.WriteLine("Ошибка, ввели не число 1 или 2");
+                Menu();
+            }
+
+            Test.Add(a);
         }
     }
 }
+
