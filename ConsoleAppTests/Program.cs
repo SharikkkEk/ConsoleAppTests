@@ -39,11 +39,13 @@ namespace ConsoleAppTests
                 else
                 {
                     Console.WriteLine("Вы ввели некорректное значение");
+                    Menu();
                 }
             }
             catch
             {
                 Console.WriteLine("Вы ввели некорректное значение");
+                Menu();
             }
         }
 
@@ -63,6 +65,7 @@ namespace ConsoleAppTests
             catch
             {
                 Console.WriteLine("Вы ввели не число");
+                Menu();
             }
 
             string Json = JsonConvert.SerializeObject(Test);
