@@ -69,7 +69,8 @@ namespace ConsoleAppTests
             }
 
             string Json = JsonConvert.SerializeObject(Test);
-            File.WriteAllText($@"D:\\{test_name}.txt", Json);
+            Directory.CreateDirectory("C:\\Tester\\");
+            File.WriteAllText($@"C:\\Tester\\{test_name}.txt", Json);
             Menu();
         }
 
