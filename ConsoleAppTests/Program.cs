@@ -8,7 +8,6 @@ namespace ConsoleAppTests
 {
     class Program
     {
-        
         public struct test_element
         {
             public string questions_name;
@@ -17,10 +16,12 @@ namespace ConsoleAppTests
             public int questions_true_variant;
         }
         public static List<test_element> Test = new List<test_element>();
+
         static void Main(string[] args)
         {
             Menu();
         }
+
         static void Menu()
         {
             Console.WriteLine("Введите 1, если хотите создать тест,  или введите 2, если хотите пройти тест");
@@ -45,7 +46,8 @@ namespace ConsoleAppTests
                 Console.WriteLine("Вы ввели некорректное значение");
             }
         }
-        static void CreateTest()
+
+        public static void CreateTest()
         {
             Console.WriteLine("Введите название теста");
             string test_name = Console.ReadLine();
@@ -70,7 +72,13 @@ namespace ConsoleAppTests
 
         static void PassTest() // В этой функции я буду загружать переменные и списки из файла json
         {
-
+            Console.WriteLine("Введите название теста");
+            string test_name_1 = Console.ReadLine();
+            List<test_element> loaded_test = JsonConvert.DeserializeObject<List<test_element>>(File.ReadAllText($"D:\\{test_name_1}.txt"));
+            for (int i = 0; i < loaded_test.Count; i++)
+            {
+                Console.WriteLine();
+            }
         }
 
         static void CycleGenerateTest()
