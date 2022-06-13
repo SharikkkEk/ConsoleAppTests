@@ -72,13 +72,33 @@ namespace ConsoleAppTests
 
         static void PassTest() // В этой функции я буду загружать переменные и списки из файла json
         {
+            int points = 0;
             Console.WriteLine("Введите название теста");
             string test_name_1 = Console.ReadLine();
             List<test_element> loaded_test = JsonConvert.DeserializeObject<List<test_element>>(File.ReadAllText($"D:\\{test_name_1}.txt"));
             for (int i = 0; i < loaded_test.Count; i++)
             {
-                Console.WriteLine();
+                Console.WriteLine($"Вопрос {i+1}: {loaded_test[i].questions_name}");
+                Console.WriteLine($"Первый вариант ответа - {loaded_test[i].questions_1_variant}, Второй вариант ответа - {loaded_test[i].questions_2_variant}");
+                Console.Write("Ваш ответ - ");
+                int otvet = int.Parse(Console.ReadLine());
+                if (otvet != 1 && otvet != 2)
+                {
+                    Console.WriteLine("Вы ввели некорректное значение");
+                    Menu();
+                }
+                if (otvet == loaded_test[i].questions_true_variant)
+                {
+                    points++;
+                    Console.WriteLine("Верно");
+                }
+                else
+                {
+                    Console.WriteLine("Неверно");
+                }
             }
+            Console.WriteLine($"Вы ответили правильно на {points} вопросов из {loaded_test.Count}");
+            Menu();
         }
 
         static void CycleGenerateTest()
