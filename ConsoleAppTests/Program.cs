@@ -79,7 +79,7 @@ namespace ConsoleAppTests
             int points = 0;
             Console.WriteLine("Введите название теста");
             string test_name_1 = Console.ReadLine();
-            List<test_element> loaded_test = JsonConvert.DeserializeObject<List<test_element>>(File.ReadAllText($"D:\\{test_name_1}.txt"));
+            List<test_element> loaded_test = JsonConvert.DeserializeObject<List<test_element>>(File.ReadAllText($"C:\\Tester\\{test_name_1}.txt"));
             for (int i = 0; i < loaded_test.Count; i++)
             {
                 Console.WriteLine($"Вопрос {i+1}: {loaded_test[i].questions_name}");
